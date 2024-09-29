@@ -6,6 +6,7 @@ import Header from './components/Header'
 import Products from './pages/Products'
 import Inventory from './pages/Inventory'
 import Clients from './pages/Clients'
+import Sales from './pages/Sales'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/products' element={<Products />} />
         <Route path='/stock' element={<Inventory />} />
         <Route path='/clients' element={<Clients />} />
+        <Route path='/sales' element={<Sales />} />
       </Route>
       <Route path='/sign-in' element={<SignIn />} />
       {/* <Route path='/sign-up' element={<SignUp />} /> */}

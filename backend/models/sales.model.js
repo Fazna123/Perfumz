@@ -10,7 +10,7 @@ const salesSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Client",
     },
-    quantity: {
+    soldUnitsQuantity: {
       type: Number,
     },
   },

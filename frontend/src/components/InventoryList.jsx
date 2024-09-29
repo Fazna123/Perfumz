@@ -31,7 +31,6 @@ export default function InventoryList() {
                     stockStatus: stock.quantity > 5 ? "InStock" : "LowStock",
                 }))
                 setRows(newRows)
-                console.log(newRows)
             }
         } catch (error) {
             toast.error("Failed to fetch Inventory Data")
@@ -66,7 +65,6 @@ export default function InventoryList() {
     };
 
     const handleAddStock = async () => {
-        console.log(newStock)
         try {
             const response = await api.put(`inventory/add-stock/${updatingProduct}`, newStock);
             setRows(rows.map(row => (row._id === updatingProduct ? response.data.inventory : row)));

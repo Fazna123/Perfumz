@@ -64,19 +64,19 @@ function Header() {
                         {token ? (
                             <>
                                 <Link to={'/'}>
-                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/') ? 'bg-white text-customTeal' : ''}`}>Dashboard</li>
+                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/') ? 'bg-white text-teal-800' : ''}`}>Dashboard</li>
                                 </Link>
                                 <Link to={'/products'}>
-                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/products') ? 'bg-white text-customTeal' : ''}`}>Products</li>
+                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/products') ? 'bg-white text-teal-800' : ''}`}>Products</li>
                                 </Link>
                                 <Link to={'/stock'}>
-                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/stock') ? 'bg-white text-customTeal' : ''}`}>Inventory</li>
+                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/stock') ? 'bg-white text-teal-800' : ''}`}>Inventory</li>
                                 </Link>
                                 <Link to={'/clients'}>
-                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/clients') ? 'bg-white text-customTeal' : ''}`}>Clients</li>
+                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/clients') ? 'bg-white text-teal-800' : ''}`}>Clients</li>
                                 </Link>
                                 <Link to={'/sales'}>
-                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/sales') ? 'bg-white text-customTeal' : ''}`}>Sales</li>
+                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/sales') ? 'bg-white text-teal-800' : ''}`}>Sales</li>
                                 </Link>
                                 <button onClick={handleSignout} className=" text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ">SignOut</button>
                             </>
@@ -104,19 +104,19 @@ function Header() {
                     {token ? (
                         <>
                             <Link to={'/'}>
-                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/') ? 'bg-white text-customTeal' : ''}`}>Dashboard</li>
+                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/') ? 'bg-white text-teal-800' : ''}`}>Dashboard</li>
                             </Link>
                             <Link to={'/products'}>
-                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/products') ? 'bg-white text-customTeal' : ''}`}>Products</li>
+                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/products') ? 'bg-white text-teal-800' : ''}`}>Products</li>
                             </Link>
                             <Link to={'/stock'}>
-                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/stock') ? 'bg-white text-customTeal' : ''}`}>Inventory</li>
+                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/stock') ? 'bg-white text-teal-800' : ''}`}>Inventory</li>
                             </Link>
                             <Link to={'/clients'}>
-                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/clients') ? 'bg-white text-customTeal' : ''}`}>Clients</li>
+                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/clients') ? 'bg-white text-teal-800' : ''}`}>Clients</li>
                             </Link>
                             <Link to={'/sales'}>
-                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/sales') ? 'bg-white text-customTeal' : ''}`}>Sales</li>
+                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/sales') ? 'bg-white text-teal-800l' : ''}`}>Sales</li>
                             </Link>
                             <button onClick={handleSignout} className=" text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ">SignOut</button>
                         </>
