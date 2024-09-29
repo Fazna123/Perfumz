@@ -32,18 +32,18 @@ function Header() {
 
     const toggleMenu = () => setMenuOpen(!isMenuOpen);
     return (
-        <div className='bg-red-200 sticky top-0 z-50'>
+        <div className='bg-customTeal sticky top-0 z-50'>
             <div className='flex justify-between items-center mx-auto py-4 px-10'>
                 {/* <Link to={'/'}>
                     <h3 className='text-red-900 rounded-lg font-extrabold text-3xl'>PerfumZ</h3>
                 </Link> */}
                 {token ? (
                     <Link to={'/'}>
-                        <h3 className='text-red-900 rounded-lg font-extrabold text-3xl'>PerfumZ</h3>
+                        <h3 className='text-white rounded-lg font-extrabold text-3xl'>PerfumZ</h3>
                     </Link>
                 ) : (
                     <Link to={'/sign-in'}>
-                        <h3 className='text-red-900 rounded-lg font-extrabold text-3xl'>PerfumZ</h3>
+                        <h3 className='text-white rounded-lg font-extrabold text-3xl'>PerfumZ</h3>
                     </Link>
                 )}
 
@@ -61,26 +61,26 @@ function Header() {
                         {token ? (
                             <>
                                 <Link to={'/'}>
-                                    <li className=" text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">Dashboard</li>
+                                    <li className=" text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">Dashboard</li>
                                 </Link>
                                 <Link to={'/products'}>
-                                    <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">Products</li>
+                                    <li className="text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">Products</li>
                                 </Link>
                                 <Link to={'/stock'}>
-                                    <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">Inventory</li>
+                                    <li className="text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">Inventory</li>
                                 </Link>
                                 <Link to={'/clients'}>
-                                    <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">Clients</li>
+                                    <li className="text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">Clients</li>
                                 </Link>
                                 <Link to={'/sales'}>
-                                    <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">Sales</li>
+                                    <li className="text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">Sales</li>
                                 </Link>
-                                <button onClick={handleSignout} className=" text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">SignOut</button>
+                                <button onClick={handleSignout} className=" text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">SignOut</button>
                             </>
                         ) : (
                             <>
                                 <Link to={'/sign-in'}>
-                                    <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">SignIn</li>
+                                    <li className="text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">SignIn</li>
                                 </Link>
                                 {/* <Link to={'/sign-up'}>
                                     <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">SignUp</li>
@@ -95,33 +95,33 @@ function Header() {
 
 
             </div>
-            <div className={`lg:hidden absolute top-16 right-0 bg-red-300 w-full ${isMenuOpen ? 'block' : 'hidden'}`}>
+            <div className={`lg:hidden absolute top-16 right-0 bg-customTeal w-full ${isMenuOpen ? 'block' : 'hidden'}`}>
                 <ul className='flex flex-col gap-4'>
 
                     {token ? (
                         <>
                             <Link to={'/'}>
-                                <li className=" text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">Dashboard</li>
+                                <li className=" text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">Dashboard</li>
                             </Link>
                             <Link to={'/products'}>
-                                <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">Products</li>
+                                <li className="text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">Products</li>
                             </Link>
                             <Link to={'/stock'}>
-                                <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">Inventory</li>
+                                <li className="text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">Inventory</li>
                             </Link>
                             <Link to={'/clients'}>
-                                <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">Clients</li>
+                                <li className="text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">Clients</li>
                             </Link>
                             <Link to={'/sales'}>
-                                <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">Sales</li>
+                                <li className="text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">Sales</li>
                             </Link>
-                            <button onClick={handleSignout} className=" text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">SignOut</button>
+                            <button onClick={handleSignout} className=" text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">SignOut</button>
                         </>
 
                     ) : (
                         <>
                             <Link to={'/sign-in'}>
-                                <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">SignIn</li>
+                                <li className="text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">SignIn</li>
                             </Link>
                             {/* <Link to={'/sign-up'}>
                                 <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">SignUp</li>

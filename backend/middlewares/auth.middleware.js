@@ -1,4 +1,4 @@
-import errorHandler from "../utils/error";
+import errorHandler from "../utils/error.js";
 
 const authVerify = async (req, res, next) => {
   try {
