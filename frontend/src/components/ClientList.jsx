@@ -5,43 +5,43 @@ import { DataGrid } from '@mui/x-data-grid'
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../axios/api';
+import { AiOutlineMail } from "react-icons/ai";
 import swal from 'sweetalert'
 
-export default function ProductsList() {
+export default function ClientList() {
     //const [rows, setRows] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
     const [modalOpen, setModalOpen] = useState(false)
-    const [newProduct, setNewProduct] = useState({ name: '', price: '', category: '', brand: '', description: "", quantity: 0 });
+    const [newClient, setNewClient] = useState({ name: '', email: '', phone: '', address: '', });
     const navigate = useNavigate();
     const [rows, setRows] = useState([]);
-    const [editingProduct, setEditingProduct] = useState(null);
+    const [editingClient, setEditingClient] = useState(null);
 
 
 
     const filteredRows = rows.filter((row) =>
         (row.name && row.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        (row.category && row.category.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        (row.brand && row.brand.toLowerCase().includes(searchTerm.toLowerCase()))
+        (row.email && row.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (row.phone && row.phone.toLowerCase().includes(searchTerm.toLowerCase()))
 
     );
-    const fetchProducts = async () => {
+    const fetchClients = async () => {
         try {
-            const response = await api.get('products/fetch')
+            const response = await api.get('client/get-clients')
             if (response.data.success === true) {
-                const newRows = response.data.products.map((product, index) => ({
+                const newRows = response.data.clientData.map((client, index) => ({
                     id: index + 1,
-                    ...product
+                    ...client
                 }))
                 setRows(newRows)
             }
         } catch (error) {
-            toast.error('Failed to fetch product list')
+            toast.error('Failed to fetch client list')
         }
     }
 
     useEffect(() => {
-
-        fetchProducts()
+        fetchClients()
     }, [])
 
     const handleSearchChange = (event) => {
@@ -55,77 +55,76 @@ export default function ProductsList() {
     // Close the modal
     const handleCloseModal = () => {
         setModalOpen(false);
-        setEditingProduct(null)
-        setNewProduct({ name: '', price: '', category: '', brand: '', description: '', });
+        setEditingClient(null)
+        setNewClient({ name: '', email: '', phone: '', address: '', });
     };
 
     // Handle create new product action
-    const handleCreateProduct = async () => {
+    const handleAddClient = async () => {
         try {
-            const response = await api.post('products/add', newProduct);
+            const response = await api.post('client/add-client', newClient);
             if (response.data.success == true) {
-                const newRow = response.data.product
-                setRows([...rows, newRow]);
-                toast.success('Product created successfully!');
+                const newRow = response.data.client
+                // setRows([...rows, newRow]);
+                toast.success('Client created successfully!');
                 handleCloseModal();
-                fetchProducts()
+                fetchClients()
             }
 
         } catch (error) {
-            toast.error(error.response.data.message || 'Failed to create product.'); // Notify error
-            console.error('Error creating product:', error);
+            toast.error(error.response.data.message || 'Failed to create product.');
+            console.error('Error adding client:', error);
         }
     };
 
-    const handleEditProduct = (row) => {
+    const handleEditClient = (row) => {
 
-        const selectedRow = rows.filter((product) => product._id === row)
+        const selectedRow = rows.filter((client) => client._id === row)
 
-        setNewProduct({
+        setNewClient({
             name: selectedRow[0].name,
-            price: selectedRow[0].price,
-            category: selectedRow[0].category,
-            brand: selectedRow[0].brand,
-            description: selectedRow[0].description,
+            email: selectedRow[0].email,
+            phone: selectedRow[0].phone,
+            address: selectedRow[0].address,
         });
-        setEditingProduct(row);
+        setEditingClient(row);
         setModalOpen(true);
     };
 
-    const handleUpdateProduct = async () => {
+    const handleUpdateClient = async () => {
         try {
-            const response = await api.put(`products/update/${editingProduct}`, newProduct);
-            setRows(rows.map(row => (row._id === editingProduct ? response.data.product : row)));
-            toast.success('Product updated successfully!');
-            setEditingProduct(null)
+            const response = await api.put(`client/update-client/${editingClient}`, newClient);
+            setRows(rows.map(row => (row._id === editingClient ? response.data.client : row)));
+            toast.success('Client Details updated successfully!');
+            setEditingClient(null)
             handleCloseModal();
-            fetchProducts();
+            fetchClients();
         } catch (error) {
-            toast.error('Failed to update product.');
-            setEditingProduct(null)
+            toast.error('Failed to update client details.');
+            setEditingClient(null)
             handleCloseModal()
-            console.error('Error updating product:', error);
+            console.error('Error updating client details:', error);
         }
     };
 
-    const handleDeleteProduct = async (id) => {
+    const handleDeleteClient = async (id) => {
         try {
-            await api.delete(`products/delete/${id}`);
+            await api.delete(`client/delete-client/${id}`);
             setRows(rows.filter(row => row._id !== id));
-            toast.success('Product deleted successfully!');
-            fetchProducts()
+            toast.success('Client deleted successfully!');
+            fetchClients()
         } catch (error) {
-            toast.error('Failed to delete product.');
-            console.error('Error deleting product:', error);
+            toast.error('Failed to delete client.');
+            console.error('Error deleting client:', error);
         }
     };
     const coloumns = [
         { field: "id", headerName: "S.No.", flex: 0.2 },
-        { field: "name", headerName: "Product", flex: 0.2 },
-        { field: "brand", headerName: "Brand", flex: 0.2 },
-        { field: "category", headerName: "Category", flex: 0.2 },
-        { field: "description", headerName: "Details", flex: 0.5 },
-        { field: "price", headerName: "Price", flex: 0.2 },
+        { field: "name", headerName: "Name", flex: 0.2 },
+        { field: "email", headerName: "Email", flex: 0.2 },
+        { field: "phone", headerName: "Phone", flex: 0.2 },
+        { field: "address", headerName: "Address", flex: 0.5 },
+
         {
             field: 'actions',
             headerName: 'Actions',
@@ -134,26 +133,45 @@ export default function ProductsList() {
                 <>
                     <Button variant="outlined" color="primary" onClick={(e) => {
                         e.stopPropagation()
-                        handleEditProduct(params.row._id);
+                        handleEditClient(params.row._id);
                     }}>
                         Edit
                     </Button>
                     <Button variant="outlined" color="secondary" onClick={(e) => {
                         e.stopPropagation();
-                        handleDeleteProduct(params.row._id);
+                        handleDeleteClient(params.row._id);
                     }} style={{ marginLeft: '5px' }}>
                         Delete
                     </Button>
                 </>
             )
-        }
+        },
+        {
+            field: "   ",
+            headerName: "Email",
+            flex: 0.2,
+            renderCell: (params) => {
+                const { row } = params;
+                const handleLinkClick = (e) => {
+                    e.stopPropagation();
+                };
+                return (
+                    <a href={`mailto:${row.email}`} onClick={(e) => handleLinkClick(e)}>
+                        <AiOutlineMail
+                            className="text-black mt-5 ml-2 text-center"
+                            size={20}
+                        />
+                    </a>
+                );
+            },
+        },
     ]
     return (
         <div className="mt-[30px] w-full">
             <Box m="40px">
                 <Box display="flex" justifyContent="space-between" mb={3}>
                     <TextField
-                        label="Search Products"
+                        label="Search Clients"
                         variant="outlined"
                         value={searchTerm}
                         onChange={handleSearchChange}
@@ -173,7 +191,7 @@ export default function ProductsList() {
                         }}
                         onClick={handleOpenModal}
                     >
-                        Create New Product
+                        Add New Client
                     </Button>
                 </Box>
                 <Box
@@ -245,78 +263,51 @@ export default function ProductsList() {
                 </Box>
             </Box>
             <Dialog open={modalOpen} onClose={handleCloseModal}>
-                <DialogTitle>{editingProduct ? "Edit Product" : "Create New Product"}</DialogTitle>
+                <DialogTitle>{editingClient ? "Edit Client Details" : "Enter New Client Details"}</DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
                         margin="dense"
-                        label="Product Name"
+                        label="Name"
                         type="text"
                         fullWidth
                         variant="outlined"
-                        value={newProduct.name}
+                        value={newClient.name}
                         required
-                        onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+                        onChange={(e) => setNewClient({ ...newClient, name: e.target.value })}
                     />
                     <TextField
                         margin="dense"
-                        label="Price"
-                        type="number"
+                        label="Email"
+                        type="text"
                         fullWidth
                         variant="outlined"
-                        value={newProduct.price}
-                        onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+                        value={newClient.email}
+                        onChange={(e) => setNewClient({ ...newClient, email: e.target.value })}
                     />
                     <TextField
                         margin="dense"
-                        label="Category"
+                        label="Phone"
                         type="text"
                         fullWidth
                         variant="outlined"
-                        value={newProduct.category}
-                        onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+                        value={newClient.phone}
+                        onChange={(e) => setNewClient({ ...newClient, phone: e.target.value })}
                     />
                     <TextField
                         margin="dense"
-                        label="Brand"
+                        label="Address"
                         type="text"
                         fullWidth
                         variant="outlined"
-                        value={newProduct.brand}
-                        onChange={(e) => setNewProduct({ ...newProduct, brand: e.target.value })}
+                        value={newClient.address}
+                        onChange={(e) => setNewClient({ ...newClient, address: e.target.value })}
                     />
-                    <TextField
-                        margin="dense"
-                        label="Description"
-                        type="text"
-                        fullWidth
-                        variant="outlined"
-                        value={newProduct.description}
-                        onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-                    />
-                    {editingProduct ? "" : <TextField
-                        margin="dense"
-                        label="Quantity"
-                        type="text"
-                        fullWidth
-                        variant="outlined"
-                        value={newProduct.quantity}
-                        onChange={(e) => setNewProduct({ ...newProduct, quantity: e.target.value })}
-                    />}
-                    {/* <TextField
-                        margin="dense"
-                        label="Quantity"
-                        type="text"
-                        fullWidth
-                        variant="outlined"
-                        value={newProduct.quantity}
-                        onChange={(e) => setNewProduct({ ...newProduct, quantity: e.target.value })}
-                    /> */}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseModal} color="secondary">Cancel</Button>
-                    <Button onClick={editingProduct ? handleUpdateProduct : handleCreateProduct} color="primary">
-                        {editingProduct ? "Update" : "Create"}
+                    <Button onClick={editingClient ? handleUpdateClient : handleAddClient} color="primary">
+                        {editingClient ? "Update" : "Add"}
                     </Button>
                 </DialogActions>
             </Dialog>
