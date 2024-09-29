@@ -11,7 +11,7 @@ export default function ProductsList() {
     //const [rows, setRows] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
     const [modalOpen, setModalOpen] = useState(false)
-    const [newProduct, setNewProduct] = useState({ name: '', price: '', category: '', brand: '', description: "", });
+    const [newProduct, setNewProduct] = useState({ name: '', price: '', category: '', brand: '', description: "", quantity: 0 });
     const navigate = useNavigate();
     const [rows, setRows] = useState([]);
     const [editingProduct, setEditingProduct] = useState(null);
@@ -24,22 +24,23 @@ export default function ProductsList() {
         (row.brand && row.brand.toLowerCase().includes(searchTerm.toLowerCase()))
 
     );
+    const fetchProducts = async () => {
+        try {
+            const response = await api.get('products/fetch')
+            if (response.data.success === true) {
+                const newRows = response.data.products.map((product, index) => ({
+                    id: index + 1,
+                    ...product
+                }))
+                setRows(newRows)
+            }
+        } catch (error) {
+            toast.error('Failed to fetch product list')
+        }
+    }
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await api.get('products/fetch')
-                if (response.data.success === true) {
-                    const newRows = response.data.products.map((product, index) => ({
-                        id: index + 1,
-                        ...product
-                    }))
-                    setRows(newRows)
-                }
-            } catch (error) {
-                toast.error('Failed to fetch product list')
-            }
-        }
+
         fetchProducts()
     }, [])
 
@@ -54,6 +55,7 @@ export default function ProductsList() {
     // Close the modal
     const handleCloseModal = () => {
         setModalOpen(false);
+        setEditingProduct(null)
         setNewProduct({ name: '', price: '', category: '', brand: '', description: '', });
     };
 
@@ -64,8 +66,9 @@ export default function ProductsList() {
             if (response.data.success == true) {
                 const newRow = response.data.product
                 setRows([...rows, newRow]);
-                swal('Product created successfully!');
+                toast.success('Product created successfully!');
                 handleCloseModal();
+                fetchProducts()
             }
 
         } catch (error) {
@@ -92,11 +95,15 @@ export default function ProductsList() {
     const handleUpdateProduct = async () => {
         try {
             const response = await api.put(`products/update/${editingProduct}`, newProduct);
-            setRows(rows.map(row => (row._id === editingProduct._id ? response.data.product : row)));
+            setRows(rows.map(row => (row._id === editingProduct ? response.data.product : row)));
             toast.success('Product updated successfully!');
+            setEditingProduct(null)
             handleCloseModal();
+            fetchProducts();
         } catch (error) {
             toast.error('Failed to update product.');
+            setEditingProduct(null)
+            handleCloseModal()
             console.error('Error updating product:', error);
         }
     };
@@ -106,6 +113,7 @@ export default function ProductsList() {
             await api.delete(`products/delete/${id}`);
             setRows(rows.filter(row => row._id !== id));
             toast.success('Product deleted successfully!');
+            fetchProducts()
         } catch (error) {
             toast.error('Failed to delete product.');
             console.error('Error deleting product:', error);
@@ -113,9 +121,9 @@ export default function ProductsList() {
     };
     const coloumns = [
         { field: "id", headerName: "S.No.", flex: 0.2 },
-        { field: "name", headerName: "Product", flex: 0.5 },
-        { field: "brand", headerName: "Brand", flex: 0.5 },
-        { field: "category", headerName: "Category", flex: 0.5 },
+        { field: "name", headerName: "Product", flex: 0.2 },
+        { field: "brand", headerName: "Brand", flex: 0.2 },
+        { field: "category", headerName: "Category", flex: 0.2 },
         { field: "description", headerName: "Details", flex: 0.5 },
         { field: "price", headerName: "Price", flex: 0.2 },
         {
@@ -141,7 +149,7 @@ export default function ProductsList() {
         }
     ]
     return (
-        <div className="mt-[80px] w-full">
+        <div className="mt-[30px] w-full">
             <Box m="40px">
                 <Box display="flex" justifyContent="space-between" mb={3}>
                     <TextField
@@ -169,8 +177,8 @@ export default function ProductsList() {
                     </Button>
                 </Box>
                 <Box
-                    m="40px 0 0 0"
-                    height="80vh"
+                    m="20px 0 0 0"
+                    height="70vh"
                     sx={{
                         "& .MuiDataGrid-root": {
                             border: "none",
@@ -276,6 +284,33 @@ export default function ProductsList() {
                         value={newProduct.brand}
                         onChange={(e) => setNewProduct({ ...newProduct, brand: e.target.value })}
                     />
+                    <TextField
+                        margin="dense"
+                        label="Description"
+                        type="text"
+                        fullWidth
+                        variant="outlined"
+                        value={newProduct.description}
+                        onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
+                    />
+                    {editingProduct ? "" : <TextField
+                        margin="dense"
+                        label="Quantity"
+                        type="text"
+                        fullWidth
+                        variant="outlined"
+                        value={newProduct.quantity}
+                        onChange={(e) => setNewProduct({ ...newProduct, quantity: e.target.value })}
+                    />}
+                    {/* <TextField
+                        margin="dense"
+                        label="Quantity"
+                        type="text"
+                        fullWidth
+                        variant="outlined"
+                        value={newProduct.quantity}
+                        onChange={(e) => setNewProduct({ ...newProduct, quantity: e.target.value })}
+                    /> */}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseModal} color="secondary">Cancel</Button>

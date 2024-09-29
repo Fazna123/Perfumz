@@ -5,6 +5,7 @@ const inventorySchema = new mongoose.Schema(
     productId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Product",
+      unique: true,
     },
     quantity: {
       type: Number,

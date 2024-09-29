@@ -1,9 +1,10 @@
+import Inventory from "../models/inventory.model.js";
 import Product from "../models/product.model.js";
 import errorHandler from "../utils/error.js";
 
 export const addProduct = async (req, res, next) => {
   try {
-    const { name, brand, category, description, price } = req.body;
+    const { name, brand, category, description, price, quantity } = req.body;
     const isExist = await Product.findOne({ name });
     if (isExist) {
       return next(errorHandler(409, "Product Already Exists"));
@@ -15,7 +16,12 @@ export const addProduct = async (req, res, next) => {
       description,
       price,
     });
-    await newProduct.save();
+    const productAdded = await newProduct.save();
+    const newInventory = new Inventory({
+      productId: productAdded._id,
+      quantity,
+    });
+    await newInventory.save();
     return res.status(201).json({
       success: true,
       product: newProduct,
@@ -46,6 +52,12 @@ export const updateProduct = async (req, res, next) => {
       { name, brand, price, category, description },
       { new: true }
     );
+    // const inventoryUpdate = await Inventory.findOne({ productId });
+    // const updated = await Inventory.findByIdAndUpdate(
+    //   inventoryUpdate._id,
+    //   { $inc: { quantity: quantity } },
+    //   { new: true }
+    // );
     return res
       .status(201)
       .json({ success: true, product, message: "Product updated" });
@@ -58,7 +70,8 @@ export const deleteProduct = async (req, res, next) => {
   try {
     const productId = req.params.id;
     const isDeleted = await Product.findByIdAndDelete(productId);
-    if (isDeleted) {
+    const inventoryUpdate = await Inventory.deleteOne({ productId });
+    if (isDeleted && inventoryUpdate) {
       return res
         .status(200)
         .json({ success: true, message: "Product deleted" });
