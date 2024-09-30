@@ -64,26 +64,26 @@ function Header() {
                         {token ? (
                             <>
                                 <Link to={'/'}>
-                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/') ? 'bg-white text-teal-900' : ''}`}>Dashboard</li>
+                                    <li className={` font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/') ? 'bg-white text-teal-900' : 'text-white'}`}>Dashboard</li>
                                 </Link>
                                 <Link to={'/products'}>
-                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/products') ? 'bg-white text-teal-900' : ''}`}>Products</li>
+                                    <li className={` font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/products') ? 'bg-white text-teal-900' : 'text-white'}`}>Products</li>
                                 </Link>
                                 <Link to={'/stock'}>
-                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/stock') ? 'bg-white text-teal-900' : ''}`}>Inventory</li>
+                                    <li className={` font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/stock') ? 'bg-white text-teal-900' : 'text-white'}`}>Inventory</li>
                                 </Link>
                                 <Link to={'/clients'}>
-                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/clients') ? 'bg-white text-teal-900' : ''}`}>Clients</li>
+                                    <li className={`font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/clients') ? 'bg-white text-teal-900' : 'text-white'}`}>Clients</li>
                                 </Link>
                                 <Link to={'/sales'}>
-                                    <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/sales') ? 'bg-white text-teal-900' : ''}`}>Sales</li>
+                                    <li className={`font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/sales') ? 'bg-white text-teal-900' : 'text-white'}`}>Sales</li>
                                 </Link>
-                                <button onClick={handleSignout} className=" text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ">SignOut</button>
+                                <button onClick={handleSignout} className="text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ">SignOut</button>
                             </>
                         ) : (
                             <>
                                 <Link to={'/sign-in'}>
-                                    <li className="text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">SignIn</li>
+                                    <li className="font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">SignIn</li>
                                 </Link>
                                 {/* <Link to={'/sign-up'}>
                                     <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">SignUp</li>
@@ -104,19 +104,19 @@ function Header() {
                     {token ? (
                         <>
                             <Link to={'/dashboard'}>
-                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/') ? 'bg-white text-teal-900' : ''}`}>Dashboard</li>
+                                <li className={`font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/') ? 'bg-white text-teal-900' : 'text-white'}`}>Dashboard</li>
                             </Link>
                             <Link to={'/products'}>
-                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/products') ? 'bg-white text-teal-900' : ''}`}>Products</li>
+                                <li className={`font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/products') ? 'bg-white text-teal-900' : 'text-white'}`}>Products</li>
                             </Link>
                             <Link to={'/stock'}>
-                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/stock') ? 'bg-white text-teal-900' : ''}`}>Inventory</li>
+                                <li className={`font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/stock') ? 'bg-white text-teal-900' : 'text-white'}`}>Inventory</li>
                             </Link>
                             <Link to={'/clients'}>
-                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/clients') ? 'bg-white text-teal-900' : ''}`}>Clients</li>
+                                <li className={`font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/clients') ? 'bg-white text-teal-900' : 'text-white'}`}>Clients</li>
                             </Link>
                             <Link to={'/sales'}>
-                                <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/sales') ? 'bg-white text-teal-900' : ''}`}>Sales</li>
+                                <li className={`font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/sales') ? 'bg-white text-teal-900' : 'text-white'}`}>Sales</li>
                             </Link>
                             <button onClick={handleSignout} className=" text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ">SignOut</button>
                         </>
