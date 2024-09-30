@@ -9,9 +9,9 @@ import authVerify from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-router.post("/add", addProduct);
-router.get("/fetch", getProducts);
-router.put("/update/:id", updateProduct);
-router.delete("/delete/:id", deleteProduct);
+router.post("/add", authVerify, addProduct);
+router.get("/fetch", authVerify, getProducts);
+router.put("/update/:id", authVerify, updateProduct);
+router.delete("/delete/:id", authVerify, deleteProduct);
 
 export default router;

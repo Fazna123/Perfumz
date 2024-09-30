@@ -152,7 +152,7 @@ export default function SalesList() {
         }
     };
     const coloumns = [
-        { field: "id", headerName: "S.No.", flex: 0.2 },
+        { field: "id", headerName: "S.No.", flex: 0.1 },
         { field: "createdAt", headerName: "Date", flex: 0.2 },
         { field: "productName", headerName: "Product", flex: 0.2 },
         { field: "clientEmail", headerName: "Client Email", flex: 0.2 },

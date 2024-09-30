@@ -5,12 +5,13 @@ import {
   getClients,
   updateClient,
 } from "../controllers/client.controller.js";
+import authVerify from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-router.get("/get-clients", getClients);
-router.post("/add-client", addClient);
-router.put("/update-client/:id", updateClient);
-router.delete("/delete-client/:id", deleteClient);
+router.get("/get-clients", authVerify, getClients);
+router.post("/add-client", authVerify, addClient);
+router.put("/update-client/:id", authVerify, updateClient);
+router.delete("/delete-client/:id", authVerify, deleteClient);
 
 export default router;

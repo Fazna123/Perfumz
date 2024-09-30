@@ -1,4 +1,5 @@
 import errorHandler from "../utils/error.js";
+import jwt from "jsonwebtoken";
 
 const authVerify = async (req, res, next) => {
   try {
