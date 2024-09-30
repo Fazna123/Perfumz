@@ -13,9 +13,12 @@ const baseURI = import.meta.env.VITE_PUBLIC_BASE_API;
 
 const api = axios.create({
   baseURL: `${baseURI}/api/`,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: token ? token : "",
+  },
   withCredentials: true,
 });
-
 //api.defaults.withCredentials = true;
 console.log(api);
 
