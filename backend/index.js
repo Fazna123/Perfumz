@@ -15,7 +15,14 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: ["https://perfumz-1yn4.vercel.app"],
+    methods: ["POST", "GET", "DELETE", "PUT"],
+    credentials: true,
+  })
+);
 
 app.use("/api/products", productRoute);
 app.use("/api/inventory", inventoryRoute);
