@@ -103,7 +103,7 @@ function Header() {
 
                     {token ? (
                         <>
-                            <Link to={'/'}>
+                            <Link to={'/dashboard'}>
                                 <li className={`text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white ${isActive('/') ? 'bg-white text-teal-800' : ''}`}>Dashboard</li>
                             </Link>
                             <Link to={'/products'}>

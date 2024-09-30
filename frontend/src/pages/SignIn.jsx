@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import swal from 'sweetalert'
@@ -8,6 +8,13 @@ export default function SignIn() {
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState({ email: '', password: '' })
+
+    useEffect(() => {
+        const token = localStorage.getItem('PerfumzToken');
+        if (token) {
+            navigate('/dashboard');
+        }
+    }, [navigate]);
 
 
     const handleChange = (e) => {
@@ -20,7 +27,7 @@ export default function SignIn() {
             const data = response.data
             if (data.success === true) {
                 localStorage.setItem("PerfumzToken", data.token)
-                navigate('/')
+                navigate('/dashboard')
             } else {
                 swal('Login Failed')
             }

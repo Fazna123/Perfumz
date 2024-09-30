@@ -12,20 +12,22 @@ import Sales from './pages/Sales'
 function App() {
 
 
-  return <BrowserRouter>
-    <Header />
-    <Routes>
-      <Route element={<PrivateRoute />}>
-        <Route path='/' element={<Dashboard />} />
-        <Route path='/products' element={<Products />} />
-        <Route path='/stock' element={<Inventory />} />
-        <Route path='/clients' element={<Clients />} />
-        <Route path='/sales' element={<Sales />} />
-      </Route>
-      <Route path='/sign-in' element={<SignIn />} />
-      {/* <Route path='/sign-up' element={<SignUp />} /> */}
-    </Routes>
-  </BrowserRouter>
+  return (
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route element={<PrivateRoute />}>
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/products' element={<Products />} />
+          <Route path='/stock' element={<Inventory />} />
+          <Route path='/clients' element={<Clients />} />
+          <Route path='/sales' element={<Sales />} />
+        </Route>
+        <Route path='/' element={<SignIn />} />
+        <Route path='/sign-in' element={<SignIn />} />
+        {/* <Route path='/sign-up' element={<SignUp />} /> */}
+      </Routes>
+    </BrowserRouter>)
 
 }
 
