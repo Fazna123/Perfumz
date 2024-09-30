@@ -4,19 +4,19 @@ const token = localStorage.getItem("PerfumzToken");
 console.log("perfumztoken", token);
 const baseURI = import.meta.env.VITE_PUBLIC_BASE_API;
 
-const api = axios.create({
-  baseURL: `${baseURI}/api/`,
-  headers: {
-    Authorization: token || "",
-  },
-});
-
 // const api = axios.create({
 //   baseURL: `${baseURI}/api/`,
-//   withCredentials: true,
+//   headers: {
+//     Authorization: token || "",
+//   },
 // });
 
-api.defaults.withCredentials = true;
+const api = axios.create({
+  baseURL: `${baseURI}/api/`,
+  withCredentials: true,
+});
+
+//api.defaults.withCredentials = true;
 console.log(api);
 
 // api.interceptors.request.use(
