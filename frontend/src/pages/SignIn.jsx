@@ -36,6 +36,7 @@ export default function SignIn() {
                 swal('Error!', error?.response?.data.message,)
             } else {
                 swal('Error', 'Something went wrong')
+                console.log(error)
             }
         }
 
