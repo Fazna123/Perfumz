@@ -14,17 +14,28 @@ import connectDb from "./config/db.js";
 dotenv.config();
 
 const app = express();
+
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+  credentials: true, // Enable credentials
+};
+
+// Enable CORS middleware
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //app.use(cors());
 
-const corsOptions = {
-  origin: process.env.FRONTEND_URL || "http://localhost:5173",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-};
+// const corsOptions = {
+//   origin: process.env.FRONTEND_URL || "http://localhost:5173",
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 app.use("/api/products", productRoute);
 app.use("/api/inventory", inventoryRoute);
