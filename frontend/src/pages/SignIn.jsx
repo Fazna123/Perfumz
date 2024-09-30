@@ -28,6 +28,7 @@ export default function SignIn() {
             const data = response.data
             if (data.success === true) {
                 localStorage.setItem("PerfumzToken", data.token)
+                api.defaults.headers.common['Authorization'] = data.token;
                 navigate('/dashboard')
             } else {
                 swal('Login Failed')
