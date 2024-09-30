@@ -23,13 +23,7 @@ export default function SignIn() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post(`${import.meta.env.VITE_PUBLIC_BASE_API}/api/user/login`, formData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `${localStorage.getItem('PerfumzToken') || ''}`,
-                },
-                withCredentials: true, // Include if your API requires credentials
-            });
+            const response = await api.post(`user/login`, formData)
 
             const data = response.data
             if (data.success === true) {
