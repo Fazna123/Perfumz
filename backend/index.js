@@ -19,7 +19,7 @@ const corsOptions = {
   origin: "https://perfumz.vercel.app",
   methods: ["GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true, // Enable credentials
+  credentials: true,
 };
 
 // Enable CORS middleware
