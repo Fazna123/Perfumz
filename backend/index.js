@@ -15,18 +15,23 @@ dotenv.config();
 
 const app = express();
 
-const corsOptions = {
-  origin: "https://perfumz.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true, // Enable credentials
-};
+// const corsOptions = {
+//   origin: "https://perfumz.vercel.app",
+//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//   allowedHeaders: ["Content-Type", "Authorization"],
+//   credentials: true, // Enable credentials
+// };
 
-// Enable CORS middleware
-app.use(cors(corsOptions));
+// // Enable CORS middleware
+// app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "https://perfumz.vercel.app"); // For development purposes only
