@@ -145,3 +145,35 @@ export const deleteSalesData = async (req, res, next) => {
     next(error);
   }
 };
+
+export const totalSales = async (req, res, next) => {
+  try {
+    const salesData = await Sales.find()
+      .populate({
+        path: "productId",
+        select: "price",
+      })
+      .select("soldUnitsQuantity createdAt");
+
+    const formattedSalesData = salesData.map((sales) => ({
+      price: sales.productId.price,
+      units: sales.soldUnitsQuantity,
+      totalCost: sales.productId.price * sales.soldUnitsQuantity,
+      purchasedDate: sales.createdAt,
+    }));
+
+    const totalRevenue = formattedSalesData.reduce(
+      (acc, sale) => acc + sale.totalCost,
+      0
+    );
+
+    return res.status(201).json({
+      success: true,
+      totalAmountPerSale: formattedSalesData,
+      totalRevenue,
+      message: "Total Revenue per sales fetched",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
