@@ -7,23 +7,13 @@ const baseURI = import.meta.env.VITE_PUBLIC_BASE_API;
 const api = axios.create({
   baseURL: `${baseURI}/api/`,
   headers: {
-    "Content-Type": "text/plain",
+    "Content-Type": "application/json",
     Authorization: token ? token : "",
   },
   withCredentials: true,
 });
 //api.defaults.withCredentials = true;
 console.log(api);
-
-const post = async (url, data) => {
-  try {
-    // Stringify the data before sending
-    const response = await api.post(url, JSON.stringify(data));
-    return response;
-  } catch (error) {
-    throw error; // Rethrow the error to handle it in your component
-  }
-};
 
 // api.interceptors.request.use(
 //   (config) => {
@@ -38,4 +28,4 @@ const post = async (url, data) => {
 //   }
 // );
 
-export default { api, post };
+export default api;
