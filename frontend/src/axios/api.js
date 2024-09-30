@@ -4,23 +4,26 @@ const token = localStorage.getItem("PerfumzToken");
 console.log("perfumztoken", token);
 const baseURI = import.meta.env.VITE_PUBLIC_BASE_API;
 
-// const api = axios.create({
-//   baseURL: `${baseURI}/api/`,
-//   headers: {
-//     Authorization: token || "",
-//   },
-// });
-
 const api = axios.create({
   baseURL: `${baseURI}/api/`,
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "text/plain",
     Authorization: token ? token : "",
   },
   withCredentials: true,
 });
 //api.defaults.withCredentials = true;
 console.log(api);
+
+const post = async (url, data) => {
+  try {
+    // Stringify the data before sending
+    const response = await api.post(url, JSON.stringify(data));
+    return response;
+  } catch (error) {
+    throw error; // Rethrow the error to handle it in your component
+  }
+};
 
 // api.interceptors.request.use(
 //   (config) => {
@@ -35,4 +38,4 @@ console.log(api);
 //   }
 // );
 
-export default api;
+export default { api, post };
