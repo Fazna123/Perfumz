@@ -105,7 +105,7 @@ app.use("/api/client", clientRoute);
 app.use("/api/sales", salesRoute);
 app.use("/api/user", userRoute);
 
-app.get("/test", (req, res) => {
+app.get("/", (req, res) => {
   res.json({ message: "API is working" });
 });
 
