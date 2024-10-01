@@ -126,9 +126,7 @@ function Header() {
                             <Link to={'/sign-in'}>
                                 <li className="text-white font-bold p-3 rounded-lg hover:text-customTeal hover:bg-white">SignIn</li>
                             </Link>
-                            {/* <Link to={'/sign-up'}>
-                                <li className="text-red-900 font-bold p-3 rounded-lg hover:text-white hover:bg-red-700">SignUp</li>
-                            </Link> */}
+
                         </>
                     )}
 
